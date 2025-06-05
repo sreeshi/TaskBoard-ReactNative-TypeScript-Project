@@ -1,4 +1,57 @@
-import React, { useState } from "react";
+// src/App.tsx
+
+import React, { useState, useCallback } from 'react';
+import { Task } from './types';
+import TodoInput from './components/TodoInput';
+import TodoList from './components/TodoList';
+
+const App = () => {
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  const addTask = useCallback((text: string) => {
+    const newTask: Task = { id: Date.now(), text };
+    setTasks(prevTasks => [...prevTasks, newTask]);
+  }, []);
+
+  const deleteTask = useCallback((id: number) => {
+    setTasks(prevTasks => prevTasks.filter(task => task.id !== id));
+  }, []);
+
+  return (
+    <div>
+      <h1>To-Do List</h1>
+      <TodoInput onAddTask={addTask} />
+      <TodoList tasks={tasks} onDeleteTask={deleteTask} />
+    </div>
+  );
+};
+
+
+/*const App = () => {
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  const addTask = useCallback((text: string) => {
+    const newTask: Task = {
+      id: Date.now(),
+      text,
+    };
+    setTasks(prevTasks => [...prevTasks, newTask]);
+  }, []);
+
+  return (
+    <div>
+      <h1>To-Do List</h1>
+      <TodoInput onAddTask={addTask} />
+      <TodoList tasks={tasks} />
+    </div>
+  );
+};*/
+
+export default App;
+
+
+
+/*import React, { useState } from "react";
 import TodoItem from "./components/TodoItem";
 
 export interface Todo {
@@ -43,4 +96,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default App;*/
