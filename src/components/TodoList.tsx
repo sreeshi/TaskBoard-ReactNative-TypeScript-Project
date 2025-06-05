@@ -1,7 +1,28 @@
 // src/components/TodoList.tsx
 
 // src/components/TodoList.tsx
-import React, { FC } from 'react';
+
+import React from 'react';
+import { Task } from '../types';
+
+interface Props {
+  tasks: Task[];
+}
+
+const TodoList: React.FC<Props> = ({ tasks }) => (
+  <ul>
+    {tasks.map((task) => (
+      <li key={task.id}>
+        {task.text} - Priority: {task.priority}
+      </li>
+    ))}
+  </ul>
+);
+
+export default TodoList;
+
+
+/*import React, { FC } from 'react';
 import TodoItem from './TodoItem';
 import { Task } from '../types';
 
@@ -20,7 +41,7 @@ const TodoList: FC<TodoListProps> = ({ tasks, onDeleteTask }) => {
   );
 };
 
-export default TodoList;
+export default TodoList;*/
 
 
 /*import React, { useState } from 'react';

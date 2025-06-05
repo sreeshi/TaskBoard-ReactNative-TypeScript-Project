@@ -1,6 +1,37 @@
 // src/App.tsx
 
-import React, { useState, useCallback } from 'react';
+// src/App.tsx
+
+import React, { useState } from 'react';
+import { Task } from './types';
+import TaskForm from './components/TaskForm';
+import TodoList from './components/TodoList';
+
+const App: React.FC = () => {
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  const addTask = (text: string, priority: number) => {
+    const newTask: Task = {
+      id: Date.now(),
+      text,
+      priority
+    };
+    setTasks([...tasks, newTask]);
+  };
+
+  return (
+    <div>
+      <h1>Task Manager</h1>
+      <TaskForm onAddTask={addTask} />
+      <TodoList tasks={tasks} />
+    </div>
+  );
+};
+
+export default App;
+
+
+/*import React, { useState, useCallback } from 'react';
 import { Task } from './types';
 import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
@@ -24,7 +55,7 @@ const App = () => {
       <TodoList tasks={tasks} onDeleteTask={deleteTask} />
     </div>
   );
-};
+};*/
 
 
 /*const App = () => {
@@ -47,7 +78,7 @@ const App = () => {
   );
 };*/
 
-export default App;
+//export default App;
 
 
 
